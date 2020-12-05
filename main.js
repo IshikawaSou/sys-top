@@ -1,5 +1,6 @@
 const path = require('path');
 const { app, Menu, ipcMain } = require('electron');
+const { spawn } = require('child_process');
 const Store = require('./Store');
 const MainWindow = require('./MainWindow');
 const AppTray = require('./AppTray');
@@ -22,6 +23,9 @@ let store = new Store({
     }
   }
 });
+
+let python = spawn('python', [path.join(__dirname, 'python_scripts', 'sample.py')]);
+//console.log(python);
 
 // Single Instance
 const gotTheLock = app.requestSingleInstanceLock()
