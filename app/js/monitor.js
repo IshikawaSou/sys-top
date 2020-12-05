@@ -40,6 +40,13 @@ setInterval(() => {
 
             localStorage.setItem('lastNotify', +new Date())
         }
+
+        // Mem usage
+        mem.info().then((info) => {
+            var memUsage = (info.usedMemMb / info.totalMemMb) * 100;
+            memUsage = Math.round(memUsage * 100) / 100;
+            document.getElementById('mem-usage').innerText = `${memUsage} %`;
+        });
     });
 
     // cpu free
@@ -63,6 +70,7 @@ document.getElementById('os').innerText = `${os.type()} ${os.arch()}`;
 // total mem
 mem.info().then((info) => {
     document.getElementById('mem-total').innerText = `${info.totalMemMb / 1000} GB`;
+    document.getElementById('mem-total_').innerText = `${info.totalMemMb / 1000} GB`;
 });
 
 // show days, hours, mins, secs
